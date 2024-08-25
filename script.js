@@ -70,7 +70,9 @@ function DoSort(){
     if(SortType.value == 'Stalin'){
     StalinSort();
     }
-
+    if(SortType.value == 'Bogo'){
+        BogoSort();
+    }
 
 
 
@@ -88,12 +90,11 @@ function StalinSort(){
     
 
     let Alength = SortA.children.length;
-    let arr = [...SortA.children];
     let i = 1;
     
     const intervalId = setInterval(function(){ 
         if (i<Alength){
-            let flag=false;
+            // let flag=false;
             // SortA.children[i].style.backgroundColor = 'green';
             let e1 = parseFloat(SortA.children[i].style.height);
             let e2 = parseFloat(SortA.children[i-1].style.height); 
@@ -119,6 +120,45 @@ function StalinSort(){
    
    
 
+}
+
+
+
+function BogoSort(){
+    CrButt.style.visibility = "hidden";
+    SortButt.style.visibility = "hidden";
+    RandButt.style.visibility = 'hidden';
+    
+
+    let Alength = SortA.children.length;
+    
+    
+    const intervalId = setInterval(function(){ 
+        let sorted = true;
+        for(let i=1;i<Alength;i++){
+            let e1 = parseFloat(SortA.children[i].style.height);
+            let e2 = parseFloat(SortA.children[i-1].style.height);
+            if(e1<e2){sorted=false;}
+        }
+        if (!sorted){
+            [...SortA.children].forEach(element => {
+                let swapwith = Math.floor( Math.random() * SortA.children.length );
+                logToPage(swapwith);
+                let h1 = element.style.height;
+                let h2 = SortA.children[swapwith].style.height;
+                element.style.height = h2;
+                SortA.children[swapwith].style.height = h1;
+        
+            });
+            
+        }
+        else {
+            CrButt.style.visibility = "visible";
+            SortButt.style.visibility = "visible";
+            RandButt.style.visibility = 'visible';    
+            clearInterval(intervalId); // Остановить интервал после завершения
+        }
+    }, 100);
 }
 
 
