@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>Бобрукурва</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="body">
+        <div>
+            <div class="options">
+                
+            <select id="SType">
+                <option value="Bubble">Bubble sort</option>
+                <option value="Insertion">Insertion sort</option>
+                <option value="Bogo">Bogo sort</option>
+                <option value="Stalin">Stalin sort</option>
+            </select>
+            <select id="SNum">
+                <option value="5">5</option>
+                    <option value="16">16</option>
+                    <option value="64">64</option>
+                    <option value="128">128</option>
+                    <option value="256">256</option>
+                    <option value="512">512</option>
+                    <option value="1024">1024</option>
+                    <option value="2048">2048</option>
+            </select>
+            <button onclick="Create()" id="CreateButt">Create</button>
+            <button onclick="RandomD()" style="visibility: hidden;" id="Ran">Random</button>
+            <button onclick="DoSort()" style="visibility: hidden;" id="Sor">Sort</button>
+            </div>
+            <div class="sort-a" id="Sort-a">
+            
+            </div>
+        </div>
+
+        <div id="consoleOutput"></div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
