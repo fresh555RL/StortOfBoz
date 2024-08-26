@@ -20,7 +20,7 @@ function logToPage(message) {
 
 function VisibleOn(){
     CrButt.style.visibility = "visible";
-    SortButt.style.visibility = "visible";
+    // SortButt.style.visibility = "visible";
     RandButt.style.visibility = 'visible'; 
 }
 function VisibleOff(){
@@ -87,7 +87,9 @@ function DoSort(){
     if(SortType.value == 'Insertion'){
         InsertionSort();
     }
-
+    if(SortType.value =='Selection'){
+        SelectionSort();
+    }
 
 
    
@@ -175,17 +177,19 @@ function BubbleSort(){
     
 
     let Alength = SortA.children.length;
-    let i=0;
+    // let i=0;
     let j=0;
-    
+    for(let i=0;i<Alength;i++){
+        SortA.children[i].style.backgroundColor = "red"; 
+    }
     const intervalId = setInterval(function(){ 
         
         if(j<Alength){
-
-            if(i<Alength-j-1){
+            
+            for(let i=0;i<Alength-j-1;i++){
                 
-                SortA.children[i].style.backgroundColor = "red"; 
-                SortA.children[i+1].style.backgroundColor = "red";
+                 
+                
 
                 let e1 = parseFloat(SortA.children[i].style.height);
                 let e2 = parseFloat(SortA.children[i+1].style.height);
@@ -194,17 +198,14 @@ function BubbleSort(){
                     SortA.children[i+1].style.height = e1 + "%";
                 }
                 
-                setTimeout(() => {
-                    SortA.children[i].style.backgroundColor = "wheat"; 
-                    SortA.children[i + 1].style.backgroundColor = "wheat";
-                }, 1);
+                
 
-                i++;
+                
             }
-            else{
-                i=0;
-                j++;
-            }
+            // logToPage(;
+            SortA.children[Alength-j-1].style.backgroundColor = "wheat"; 
+            j++;
+        
 
 
         }
@@ -235,7 +236,7 @@ function InsertionSort(){
     const intervalId = setInterval(function(){ 
         
         if(j<Alength){
-            SortA.children[j].style.backgroundColor = "red"; 
+            
             if(i!=0){
                 
                 // SortA.children[i].style.backgroundColor = "red"; 
@@ -257,7 +258,7 @@ function InsertionSort(){
                 i--;
             }
             else{
-                SortA.children[j].style.backgroundColor = "wheat"; 
+                SortA.children[j+1].style.backgroundColor = "wheat"; 
                 j++;
                 i=j;
                 
@@ -272,6 +273,61 @@ function InsertionSort(){
         
          
     }, 1        );
+
+
+}
+
+
+
+function SelectionSort(){
+
+    VisibleOff();
+    
+    
+
+    let Alength = SortA.children.length;
+    let j=0;
+    
+    for(let i=0;i<Alength;i++){
+        SortA.children[i].style.backgroundColor = "red"; 
+    }
+
+    const intervalId = setInterval(function(){ 
+        //меняем с джейтым элементом
+        if(j<Alength){
+            
+            
+            let mini = j;
+            for(let i=j+1;i<Alength;i++){
+                let e1 = parseFloat(SortA.children[mini].style.height);
+                let e2 = parseFloat(SortA.children[i].style.height);
+                if(e1>e2){mini=i;}
+                
+            }
+        
+                if(j!==mini){
+            let e1 = parseFloat(SortA.children[mini].style.height);
+            let e2 = parseFloat(SortA.children[j].style.height);
+            SortA.children[mini].style.height = e2 + "%";
+            SortA.children[j].style.height = e1 + "%";
+                }
+            SortA.children[j].style.backgroundColor = 'wheat';
+            j++;
+               
+            
+        }
+        
+
+    
+        else{
+            clearInterval(intervalId);
+            VisibleOn();  
+        }
+        
+         
+    }, 1  );
+
+
 
 
 }
