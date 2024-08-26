@@ -38,3 +38,36 @@ body{
     width: 200px; /* Ширина консоли */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для визуального отделения */
 }
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start; 
+    width: 100%;
+    height: 3vh;
+}
+
+.options button,
+.options select{
+    /* width: 1vh; */
+    text-align: center;
+    justify-content: center;
+    padding: 0 auto;
+    margin: 0;
+    height: 3vh;
+    font-size: 2vh;
+}
+button{
+    border-radius: 1vh;
+    border: 0.3vh solid black;
+}
+select {
+    border: 0.1vh solid black; 
+   
+    background-color: transparent; 
+}
+/* Убираем бордер и тень у select при фокусировке */
+select:focus {
+    outline: none; /* Убирает стандартное обведение при фокусе */
+    border: 0.1vh solid black; 
+    box-shadow: none; /* Убирает тень, если она есть */
+}

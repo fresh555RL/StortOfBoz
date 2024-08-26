@@ -54,17 +54,18 @@ function Create(){
 function RandomD() {
     Create();
     console.log(SortA.children);
-    // logToPage(SortA.children.length);
+    
+
     [...SortA.children].forEach(element => {
         let swapwith = Math.floor( Math.random() * SortA.children.length );
-        logToPage(swapwith);
+        
         let h1 = element.style.height;
         let h2 = SortA.children[swapwith].style.height;
         element.style.height = h2;
         SortA.children[swapwith].style.height = h1;
 
     });
-    logToPage(SortA.children[4].style.height);
+    
 
 
     SortButt.style.visibility = "visible";
@@ -73,7 +74,6 @@ function RandomD() {
 
 
 function DoSort(){
-    logToPage(SortType.value);
     
     if(SortType.value == 'Stalin'){
     StalinSort();
@@ -114,7 +114,7 @@ function StalinSort(){
             let e2 = parseFloat(SortA.children[i-1].style.height); 
             if(e1<e2) {
                 flag=true;
-                logToPage(`${i}: ${e1} and ${e2}`);
+               
                 
                 SortA.children[i].remove();
                 i--;
@@ -154,7 +154,7 @@ function BogoSort(){
         if (!sorted){
             [...SortA.children].forEach(element => {
                 let swapwith = Math.floor( Math.random() * SortA.children.length );
-                logToPage(swapwith);
+               
                 let h1 = element.style.height;
                 let h2 = SortA.children[swapwith].style.height;
                 element.style.height = h2;
@@ -204,7 +204,7 @@ function BubbleSort(){
 
                 
             }
-            // logToPage(;
+           
             SortA.children[Alength-j-1].style.backgroundColor = "wheat"; 
             j++;
         
@@ -289,7 +289,7 @@ function InsertionSort(){
 
                 
             }
-            // logToPage(;
+            
             SortA.children[j].style.backgroundColor = "wheat"; 
             j++;
         
