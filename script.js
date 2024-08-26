@@ -73,6 +73,9 @@ function DoSort(){
     if(SortType.value == 'Bogo'){
         BogoSort();
     }
+    if(SortType.value == 'Bubble'){
+        BubbleSort();
+    }
 
 
 
@@ -159,6 +162,63 @@ function BogoSort(){
             clearInterval(intervalId); // Остановить интервал после завершения
         }
     }, 100);
+
 }
 
+
+
+function BubbleSort(){
+
+    CrButt.style.visibility = "hidden";
+    SortButt.style.visibility = "hidden";
+    RandButt.style.visibility = 'hidden';
+    
+
+    let Alength = SortA.children.length;
+    let i=0;
+    let j=0;
+    
+    const intervalId = setInterval(function(){ 
+        
+        if(j<Alength){
+
+            if(i<Alength-j-1){
+                
+                SortA.children[i].style.backgroundColor = "red"; 
+                SortA.children[i+1].style.backgroundColor = "red";
+
+                let e1 = parseFloat(SortA.children[i].style.height);
+                let e2 = parseFloat(SortA.children[i+1].style.height);
+                if (e1>e2){
+                    SortA.children[i].style.height = e2 + "%";
+                    SortA.children[i+1].style.height = e1 + "%";
+                }
+                
+                setTimeout(() => {
+                    SortA.children[i].style.backgroundColor = "wheat"; 
+                    SortA.children[i + 1].style.backgroundColor = "wheat";
+                }, 1);
+
+                i++;
+            }
+            else{
+                i=0;
+                j++;
+            }
+
+
+        }
+        else{
+            clearInterval(intervalId);
+            CrButt.style.visibility = "visible";
+            SortButt.style.visibility = "visible";
+            RandButt.style.visibility = 'visible';   
+        }
+        
+         
+    }, 1);
+        
+}
+   
+   
 
