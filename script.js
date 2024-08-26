@@ -262,46 +262,37 @@ function PokusSort() {
 function InsertionSort(){
     VisibleOff();
     
-    
 
     let Alength = SortA.children.length;
-
-    for(let i=1;i<Alength;i++){
-        SortA.children[i].style.backgroundColor='red';
+    // let i=0;
+    let j=0;
+    for(let i=0;i<Alength;i++){
+        SortA.children[i].style.backgroundColor = "red"; 
     }
-    let j=1;
-    let i=j;
-
     const intervalId = setInterval(function(){ 
         
         if(j<Alength){
             
-            if(i!=0){
+            for(let i=j;i!=0;i--){
                 
-                // SortA.children[i].style.backgroundColor = "red"; 
-                // SortA.children[i-1].style.backgroundColor = "red";
+                 
+                
 
                 let e1 = parseFloat(SortA.children[i].style.height);
                 let e2 = parseFloat(SortA.children[i-1].style.height);
                 if (e1<e2){
-                  
                     SortA.children[i].style.height = e2 + "%";
-                    SortA.children[i-   1].style.height = e1 + "%";
+                    SortA.children[i-1].style.height = e1 + "%";
                 }
                 
-                // setTimeout(() => {
-                    // SortA.children[i].style.backgroundColor = "wheat"; 
-                //     // SortA.children[i - 1].style.backgroundColor = "wheat";
-                // }, 15);
+                
 
-                i--;
-            }
-            else{
-                SortA.children[j+1].style.backgroundColor = "wheat"; 
-                j++;
-                i=j;
                 
             }
+            // logToPage(;
+            SortA.children[j].style.backgroundColor = "wheat"; 
+            j++;
+        
 
 
         }
@@ -311,9 +302,8 @@ function InsertionSort(){
         }
         
          
-    }, 0      );
-
-
+    }, 1);
+      
 }
 
 
