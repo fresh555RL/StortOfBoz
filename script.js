@@ -18,8 +18,16 @@ function logToPage(message) {
 
 
 
-
-
+function VisibleOn(){
+    CrButt.style.visibility = "visible";
+    SortButt.style.visibility = "visible";
+    RandButt.style.visibility = 'visible'; 
+}
+function VisibleOff(){
+    CrButt.style.visibility = "hidden";
+    SortButt.style.visibility = "hidden";
+    RandButt.style.visibility = 'hidden';
+}
 
 
 function Create(){
@@ -76,8 +84,9 @@ function DoSort(){
     if(SortType.value == 'Bubble'){
         BubbleSort();
     }
-
-
+    if(SortType.value == 'Insertion'){
+        InsertionSort();
+    }
 
 
 
@@ -87,9 +96,7 @@ function DoSort(){
 
 
 function StalinSort(){
-    CrButt.style.visibility = "hidden";
-    SortButt.style.visibility = "hidden";
-    RandButt.style.visibility = 'hidden';
+    VisibleOff();
     
 
     let Alength = SortA.children.length;
@@ -114,9 +121,7 @@ function StalinSort(){
         i++;
         }
         else {
-            CrButt.style.visibility = "visible";
-            SortButt.style.visibility = "visible";
-            RandButt.style.visibility = 'visible';    
+            VisibleOn();   
             clearInterval(intervalId); // Остановить интервал после завершения
         }
     }, 1);
@@ -128,9 +133,8 @@ function StalinSort(){
 
 
 function BogoSort(){
-    CrButt.style.visibility = "hidden";
-    SortButt.style.visibility = "hidden";
-    RandButt.style.visibility = 'hidden';
+    VisibleOff();
+
     
 
     let Alength = SortA.children.length;
@@ -156,9 +160,7 @@ function BogoSort(){
             
         }
         else {
-            CrButt.style.visibility = "visible";
-            SortButt.style.visibility = "visible";
-            RandButt.style.visibility = 'visible';    
+            VisibleOn();   
             clearInterval(intervalId); // Остановить интервал после завершения
         }
     }, 100);
@@ -169,9 +171,7 @@ function BogoSort(){
 
 function BubbleSort(){
 
-    CrButt.style.visibility = "hidden";
-    SortButt.style.visibility = "hidden";
-    RandButt.style.visibility = 'hidden';
+    VisibleOff();
     
 
     let Alength = SortA.children.length;
@@ -210,9 +210,7 @@ function BubbleSort(){
         }
         else{
             clearInterval(intervalId);
-            CrButt.style.visibility = "visible";
-            SortButt.style.visibility = "visible";
-            RandButt.style.visibility = 'visible';   
+            VisibleOn();  
         }
         
          
@@ -221,4 +219,59 @@ function BubbleSort(){
 }
    
    
+function InsertionSort(){
+    VisibleOff();
+    
+    
 
+    let Alength = SortA.children.length;
+
+    for(let i=1;i<Alength;i++){
+        SortA.children[i].style.backgroundColor='red';
+    }
+    let j=1;
+    let i=j;
+
+    const intervalId = setInterval(function(){ 
+        
+        if(j<Alength){
+            SortA.children[j].style.backgroundColor = "red"; 
+            if(i!=0){
+                
+                // SortA.children[i].style.backgroundColor = "red"; 
+                // SortA.children[i-1].style.backgroundColor = "red";
+
+                let e1 = parseFloat(SortA.children[i].style.height);
+                let e2 = parseFloat(SortA.children[i-1].style.height);
+                if (e1<e2){
+                  
+                    SortA.children[i].style.height = e2 + "%";
+                    SortA.children[i-   1].style.height = e1 + "%";
+                }
+                
+                // setTimeout(() => {
+                    // SortA.children[i].style.backgroundColor = "wheat"; 
+                //     // SortA.children[i - 1].style.backgroundColor = "wheat";
+                // }, 15);
+
+                i--;
+            }
+            else{
+                SortA.children[j].style.backgroundColor = "wheat"; 
+                j++;
+                i=j;
+                
+            }
+
+
+        }
+        else{
+            clearInterval(intervalId);
+            VisibleOn();  
+        }
+        
+         
+    }, 1        );
+
+
+}
