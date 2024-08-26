@@ -90,7 +90,9 @@ function DoSort(){
     if(SortType.value =='Selection'){
         SelectionSort();
     }
-
+    if(SortType.value =='Focus'){
+        PokusSort();
+    }
 
    
 }
@@ -219,7 +221,44 @@ function BubbleSort(){
         
 }
    
-   
+function PokusSort() {
+    VisibleOff();
+
+    let Alength = SortA.children.length;
+
+    // Сохраняем начальные стили и значения высот в массив
+    let heights = [];
+    for (let i = 0; i < Alength; i++) {
+        heights[i] = parseFloat(SortA.children[i].style.height);
+        SortA.children[i].style.backgroundColor = 'red';
+    }
+
+    let j = 1;
+
+    const intervalId = setInterval(function () {
+        if (j < Alength) {
+            let i = j;
+
+            while (i > 0 && heights[i] < heights[i - 1]) {
+                // Обмен значениями в массиве
+                [heights[i], heights[i - 1]] = [heights[i - 1], heights[i]];
+                i--;
+            }
+
+            SortA.children[j].style.backgroundColor = "wheat";
+            j++;
+        } else {
+            clearInterval(intervalId);
+            VisibleOn();
+            // Применение всех изменений стилей за раз
+            for (let i = 0; i < Alength; i++) {
+                SortA.children[i].style.height = heights[i] + "%";
+            }
+        }
+    }, 0);
+}
+
+
 function InsertionSort(){
     VisibleOff();
     
@@ -272,7 +311,7 @@ function InsertionSort(){
         }
         
          
-    }, 1        );
+    }, 0      );
 
 
 }
