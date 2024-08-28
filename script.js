@@ -4,16 +4,26 @@ const SortA = document.getElementById('Sort-a');
 const RandButt = document.getElementById('Ran');
 const SortButt = document.getElementById('Sor');
 const CrButt = document.getElementById('CreateButt');
+const InfoText = document.getElementById('info-text');
 // const Coutput = document.getElementById('consoleOutput');
+var intest = 5;
+var CompareCount = 0;
+function ComparePlus(){
+    CompareCount++;
+    InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} compares`;
 
+}
+InfoText.innerText = `${SortType.value} sort - ${CompareCount} compares`;
+intest++;
+intest++;
 
 console.log(Math);
-function logToPage(message) {
-    const consoleOutput = document.getElementById('consoleOutput');
-    const newMessage = document.createElement('div');
-    newMessage.textContent = message;
-    consoleOutput.appendChild(newMessage);
-}
+// function logToPage(message) {
+//     const consoleOutput = document.getElementById('consoleOutput');
+//     const newMessage = document.createElement('div');
+//     newMessage.textContent = message;
+//     consoleOutput.appendChild(newMessage);
+// }
 
 
 
@@ -31,7 +41,9 @@ function VisibleOff(){
 
 
 function Create(){
-    SortA.style.width = "1024px"; 
+    CompareCount = 0;
+    InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} compares`;
+    SortA.style.width = "70%"; 
    
     let CountN = parseInt(SortN.value);
     SortA.innerHTML = '';
@@ -112,7 +124,10 @@ function StalinSort(){
             // SortA.children[i].style.backgroundColor = 'green';
             let e1 = parseFloat(SortA.children[i].style.height);
             let e2 = parseFloat(SortA.children[i-1].style.height); 
+            ComparePlus();
             if(e1<e2) {
+                
+            
                 flag=true;
                
                 
@@ -147,6 +162,7 @@ function BogoSort(){
     const intervalId = setInterval(function(){ 
         let sorted = true;
         for(let i=1;i<Alength;i++){
+            ComparePlus();
             let e1 = parseFloat(SortA.children[i].style.height);
             let e2 = parseFloat(SortA.children[i-1].style.height);
             if(e1<e2){sorted=false;}
@@ -173,60 +189,43 @@ function BogoSort(){
 
 
 
-function BubbleSort(){
-
+function BubbleSort() {
     VisibleOff();
-    
-
     let Alength = SortA.children.length;
-    // let i=0;
-    let j=0;
-    for(let i=0;i<Alength;i++){
+    let j = 0;
+    for (let i = 0; i < Alength; i++) {
         SortA.children[i].style.backgroundColor = "red"; 
     }
-    const intervalId = setInterval(function(){ 
-        
-        if(j<Alength){
-            
-            for(let i=0;i<Alength-j-1;i++){
-                
+    const intervalId = setInterval(function() { 
+        if (j < Alength) {
+            for (let i = 0; i < Alength - j - 1; i++) {
                  
-                
-
                 let e1 = parseFloat(SortA.children[i].style.height);
-                let e2 = parseFloat(SortA.children[i+1].style.height);
-                if (e1>e2){
+                let e2 = parseFloat(SortA.children[i + 1].style.height);
+                if (e1 > e2) {
+                    CompareCount++;
+                    InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} swaps`;
                     SortA.children[i].style.height = e2 + "%";
-                    SortA.children[i+1].style.height = e1 + "%";
+                    SortA.children[i + 1].style.height = e1 + "%";
                 }
                 
-                
-
-                
             }
-           
-            SortA.children[Alength-j-1].style.backgroundColor = "wheat"; 
+            SortA.children[Alength - j - 1].style.backgroundColor = "wheat"; 
             j++;
-        
-
-
-        }
-        else{
+        } else {
             clearInterval(intervalId);
             VisibleOn();  
         }
-        
-         
     }, 1);
-        
 }
+
    
 function PokusSort() {
     VisibleOff();
 
     let Alength = SortA.children.length;
 
-    // Сохраняем начальные стили и значения высот в массив
+   
     let heights = [];
     for (let i = 0; i < Alength; i++) {
         heights[i] = parseFloat(SortA.children[i].style.height);
@@ -240,7 +239,9 @@ function PokusSort() {
             let i = j;
 
             while (i > 0 && heights[i] < heights[i - 1]) {
-                // Обмен значениями в массиве
+                CompareCount--;
+                InfoText.innerText = `${SortType.value} sort - ${CompareCount} compares`;
+               
                 [heights[i], heights[i - 1]] = [heights[i - 1], heights[i]];
                 i--;
             }
@@ -250,7 +251,7 @@ function PokusSort() {
         } else {
             clearInterval(intervalId);
             VisibleOn();
-            // Применение всех изменений стилей за раз
+            
             for (let i = 0; i < Alength; i++) {
                 SortA.children[i].style.height = heights[i] + "%";
             }
@@ -264,7 +265,7 @@ function InsertionSort(){
     
 
     let Alength = SortA.children.length;
-    // let i=0;
+    
     let j=0;
     for(let i=0;i<Alength;i++){
         SortA.children[i].style.backgroundColor = "red"; 
@@ -274,7 +275,7 @@ function InsertionSort(){
         if(j<Alength){
             
             for(let i=j;i!=0;i--){
-                
+                ComparePlus();
                  
                 
 
@@ -283,7 +284,8 @@ function InsertionSort(){
                 if (e1<e2){
                     SortA.children[i].style.height = e2 + "%";
                     SortA.children[i-1].style.height = e1 + "%";
-                }
+                }  
+                else{break;}
                 
                 
 
@@ -328,6 +330,7 @@ function SelectionSort(){
             
             let mini = j;
             for(let i=j+1;i<Alength;i++){
+                ComparePlus();
                 let e1 = parseFloat(SortA.children[mini].style.height);
                 let e2 = parseFloat(SortA.children[i].style.height);
                 if(e1>e2){mini=i;}

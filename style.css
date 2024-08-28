@@ -54,10 +54,12 @@ body{
     padding: 0 auto;
     margin: 0;
     height: 3vh;
+    background-color: white;
     font-size: 2vh;
 }
 button{
-    border-radius: 1vh;
+    /* border-radius: 1vh; */
+
     border: 0.3vh solid black;
 }
 select {
@@ -70,4 +72,34 @@ select:focus {
     outline: none; /* Убирает стандартное обведение при фокусе */
     border: 0.1vh solid black; 
     box-shadow: none; /* Убирает тень, если она есть */
+}
+.sort-a{
+    width: 70%;
+}
+.info{
+    
+    position: absolute;
+    top: 3%;
+    left: 0%;
+    max-width: 30%;
+    height: 5vh;
+    /* background-color: rgba(137, 43, 226, 0); */
+    margin: 0 auto;
+    padding: 0 auto;
+    
+}
+.info-text{
+    margin: 0 auto;
+    padding: 0 auto;
+    text-wrap: wrap;
+    width: 100%;
+    color:whitesmoke;
+    font-weight: 600;
+    font-size:large;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-left: 10px;
+    background-color: #0000007e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
