@@ -43,6 +43,7 @@ function VisibleOff(){
 function Create(){
     CompareCount = 0;
     InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} compares`;
+    if(SortType.value=='Bogo'){InfoText.innerText = `${SortType.value} sort - 0 tries, 0 max elements on correct places`;}
     SortA.style.width = "70%"; 
    
     let CountN = parseInt(SortN.value);
@@ -59,13 +60,13 @@ function Create(){
         SortA.appendChild(ndiv);
     }    
     RandButt.style.visibility = "visible";
-    console.log(SortA.children);
+    // console.log(SortA.children);
 }
 
 
 function RandomD() {
     Create();
-    console.log(SortA.children);
+    // console.log(SortA.children);
     
 
     [...SortA.children].forEach(element => {
@@ -153,20 +154,29 @@ function StalinSort(){
 
 function BogoSort(){
     VisibleOff();
-
+    let ThisCount=0;
+    let MaxCount=0;
+    let CountTries = 0;
     
+
 
     let Alength = SortA.children.length;
     
     
     const intervalId = setInterval(function(){ 
+        ThisCount=0;;
+        CountTries++;
+        
         let sorted = true;
         for(let i=1;i<Alength;i++){
-            ComparePlus();
+            // ComparePlus();
             let e1 = parseFloat(SortA.children[i].style.height);
             let e2 = parseFloat(SortA.children[i-1].style.height);
             if(e1<e2){sorted=false;}
+            else{ThisCount++;}
         }
+        MaxCount = (MaxCount>ThisCount?MaxCount:ThisCount);
+        InfoText.innerText = `${SortType.value} sort - ${CountTries.toLocaleString()} tries, ${MaxCount+1} max elements on correct places`;
         if (!sorted){
             [...SortA.children].forEach(element => {
                 let swapwith = Math.floor( Math.random() * SortA.children.length );
@@ -191,6 +201,14 @@ function BogoSort(){
 
 function BubbleSort() {
     VisibleOff();
+    let timeer;
+    let CountN = parseInt(SortN.value);
+    if(CountN<=16){timeer=250;}
+    else if (CountN<=64){timeer=100;}
+    else if(CountN<=512){timeer=20;}
+    else{timeer=1;}
+    // console.log(timeer);
+    // console.log(12312312);
     let Alength = SortA.children.length;
     let j = 0;
     for (let i = 0; i < Alength; i++) {
@@ -204,25 +222,31 @@ function BubbleSort() {
                 let e2 = parseFloat(SortA.children[i + 1].style.height);
                 if (e1 > e2) {
                     CompareCount++;
-                    InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} swaps`;
+                    
                     SortA.children[i].style.height = e2 + "%";
                     SortA.children[i + 1].style.height = e1 + "%";
                 }
                 
             }
+            InfoText.innerText = `${SortType.value} sort - ${CompareCount.toLocaleString()} swaps`;
             SortA.children[Alength - j - 1].style.backgroundColor = "wheat"; 
             j++;
         } else {
             clearInterval(intervalId);
             VisibleOn();  
         }
-    }, 1);
+    }, timeer);
 }
 
    
 function PokusSort() {
     VisibleOff();
-
+    let timeer;
+    let CountN = parseInt(SortN.value);
+    if(CountN<=16){timeer=250;}
+    else if (CountN<=64){timeer=100;}
+    else if(CountN<=512){timeer=20;}
+    else{timeer=1;}
     let Alength = SortA.children.length;
 
    
@@ -256,13 +280,18 @@ function PokusSort() {
                 SortA.children[i].style.height = heights[i] + "%";
             }
         }
-    }, 0);
+    }, timeer);
 }
 
 
 function InsertionSort(){
     VisibleOff();
-    
+    let timeer;
+    let CountN = parseInt(SortN.value);
+    if(CountN<=16){timeer=250;}
+    else if (CountN<=64){timeer=100;}
+    else if(CountN<=512){timeer=20;}
+    else{timeer=1;}
 
     let Alength = SortA.children.length;
     
@@ -304,7 +333,7 @@ function InsertionSort(){
         }
         
          
-    }, 1);
+    }, timeer);
       
 }
 
@@ -314,7 +343,12 @@ function SelectionSort(){
 
     VisibleOff();
     
-    
+    let timeer;
+    let CountN = parseInt(SortN.value);
+    if(CountN<=16){timeer=250;}
+    else if (CountN<=64){timeer=100;}
+    else if(CountN<=512){timeer=20;}
+    else{timeer=1;}
 
     let Alength = SortA.children.length;
     let j=0;
@@ -357,7 +391,7 @@ function SelectionSort(){
         }
         
          
-    }, 1  );
+    }, timeer  );
 
 
 
