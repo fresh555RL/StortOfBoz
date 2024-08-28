@@ -5,6 +5,7 @@ const RandButt = document.getElementById('Ran');
 const SortButt = document.getElementById('Sor');
 const CrButt = document.getElementById('CreateButt');
 const InfoText = document.getElementById('info-text');
+const ClearButt = document.getElementById('clearbutton');
 // const Coutput = document.getElementById('consoleOutput');
 var intest = 5;
 var CompareCount = 0;
@@ -17,6 +18,7 @@ InfoText.innerText = `${SortType.value} sort - ${CompareCount} compares`;
 intest++;
 intest++;
 
+var intervalId;
 console.log(Math);
 // function logToPage(message) {
 //     const consoleOutput = document.getElementById('consoleOutput');
@@ -26,17 +28,25 @@ console.log(Math);
 // }
 
 
+function clearInt(){
+    clearInterval(intervalId);
+    VisibleOn();
+    // Create();
+    // SortButt.style.display = 'inline-block';
+}
 
 
 function VisibleOn(){
-    CrButt.style.visibility = "visible";
+    CrButt.style.display = "inline-block";;
     // SortButt.style.visibility = "visible";
-    RandButt.style.visibility = 'visible'; 
+    RandButt.style.display = "inline-block";; 
+    ClearButt.style.display = 'none';
 }
 function VisibleOff(){
-    CrButt.style.visibility = "hidden";
-    SortButt.style.visibility = "hidden";
-    RandButt.style.visibility = 'hidden';
+    CrButt.style.display = 'none';
+    SortButt.style.display = 'none';
+    RandButt.style.display = 'none';
+    ClearButt.style.display = 'inline-block';
 }
 
 
@@ -59,7 +69,7 @@ function Create(){
         ndiv.style.height = (100 / CountN * (i + 1)) + "%"; 
         SortA.appendChild(ndiv);
     }    
-    RandButt.style.visibility = "visible";
+    RandButt.style.display = "inline-block";
     // console.log(SortA.children);
 }
 
@@ -81,7 +91,7 @@ function RandomD() {
     
 
 
-    SortButt.style.visibility = "visible";
+    SortButt.style.display = "inline-block";
 }
 
 
@@ -119,7 +129,7 @@ function StalinSort(){
     let Alength = SortA.children.length;
     let i = 1;
     
-    const intervalId = setInterval(function(){ 
+    intervalId = setInterval(function(){ 
         if (i<Alength){
             // let flag=false;
             // SortA.children[i].style.backgroundColor = 'green';
@@ -163,7 +173,7 @@ function BogoSort(){
     let Alength = SortA.children.length;
     
     
-    const intervalId = setInterval(function(){ 
+    intervalId = setInterval(function(){ 
         ThisCount=0;;
         CountTries++;
         
@@ -214,7 +224,7 @@ function BubbleSort() {
     for (let i = 0; i < Alength; i++) {
         SortA.children[i].style.backgroundColor = "red"; 
     }
-    const intervalId = setInterval(function() { 
+    intervalId = setInterval(function() { 
         if (j < Alength) {
             for (let i = 0; i < Alength - j - 1; i++) {
                  
@@ -258,7 +268,7 @@ function PokusSort() {
 
     let j = 1;
 
-    const intervalId = setInterval(function () {
+    intervalId = setInterval(function () {
         if (j < Alength) {
             let i = j;
 
@@ -299,7 +309,7 @@ function InsertionSort(){
     for(let i=0;i<Alength;i++){
         SortA.children[i].style.backgroundColor = "red"; 
     }
-    const intervalId = setInterval(function(){ 
+    intervalId = setInterval(function(){ 
         
         if(j<Alength){
             
@@ -357,7 +367,7 @@ function SelectionSort(){
         SortA.children[i].style.backgroundColor = "red"; 
     }
 
-    const intervalId = setInterval(function(){ 
+    intervalId = setInterval(function(){ 
         //меняем с джейтым элементом
         if(j<Alength){
             
