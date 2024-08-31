@@ -1,8 +1,8 @@
 .body{
     width: 100%;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
-    
+    /* direction: column; */
     /* background-color: aqua; */
     
     height: 100vh;
@@ -103,4 +103,17 @@ select:focus {
     padding-left: 10px;
     background-color: #0000007e;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.description{
+    max-width: 60%;
+    
+}
+
+#descript{
+    max-width: 70%;
+    text-wrap: wrap;
+    font-size: large;
+    font-weight: 990;
+
 }

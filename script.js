@@ -6,8 +6,27 @@ const SortButt = document.getElementById('Sor');
 const CrButt = document.getElementById('CreateButt');
 const InfoText = document.getElementById('info-text');
 const ClearButt = document.getElementById('clearbutton');
+const DescripText = document.getElementById('descript');
 // const Coutput = document.getElementById('consoleOutput');
 var intest = 5;
+
+const sortingDescriptions = {
+    "Bubble": "Пузырьковая сортировка: многократно проходит по массиву, сравнивая соседние элементы и меняя их местами, если они стоят в неправильном порядке. Этот процесс повторяется до тех пор, пока массив не станет полностью отсортированным. В каждом проходе наибольший элемент 'всплывает' в конец массива, как пузырек, что и дало название алгоритму.",
+    
+    "Insertion": "Сортировка вставками: проходит по массиву и постепенно формирует отсортированную часть. Для каждого элемента, начиная со второго, сравнивает его с предыдущими и вставляет его в соответствующее место в отсортированной части массива. Этот процесс повторяется для всех элементов, и каждый новый элемент 'вставляется' в нужное место, создавая отсортированную последовательность.",
+    
+    "Bogo": "Бого-сортировка: случайным образом перемешивает элементы массива до тех пор, пока массив не станет отсортированным. Это крайне неэффективный алгоритм, так как в худшем случае требует бесконечного числа перестановок. Используется исключительно в учебных целях и для демонстрации неэффективных алгоритмов.",
+    
+    "Stalin": "Сортировка Сталина: проходит по массиву и удаляет все элементы, которые не следуют неубывающей последовательности. Оставляет только те элементы, которые уже отсортированы. Таким образом, результатом будет отсортированный подмассив, который состоит из 'пропущенных' элементов исходного массива.",
+    
+    "Selection": "Сортировка выбором: проходит по массиву, на каждом шаге выбирает минимальный (или максимальный) элемент из несортированной части и перемещает его в начало (или конец) массива. Этот процесс повторяется до тех пор, пока весь массив не будет отсортирован. Алгоритм разделяет массив на отсортированную и несортированную части и постепенно расширяет отсортированную часть."
+};
+
+
+
+SortType.addEventListener('change', handleSelectionChange);
+SortN.addEventListener('change', handleSelectionChange);
+
 var CompareCount = 0;
 function ComparePlus(){
     CompareCount++;
@@ -26,6 +45,13 @@ console.log(Math);
 //     newMessage.textContent = message;
 //     consoleOutput.appendChild(newMessage);
 // }
+
+
+function handleSelectionChange(event) {
+    Create();
+}
+
+
 
 
 function clearInt(){
@@ -49,6 +75,11 @@ function VisibleOff(){
     ClearButt.style.display = 'inline-block';
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 
 function Create(){
     CompareCount = 0;
@@ -58,7 +89,7 @@ function Create(){
    
     let CountN = parseInt(SortN.value);
     SortA.innerHTML = '';
-
+    DescripText.innerText = sortingDescriptions[SortType.value];
     
     let divWidthPercent = (100 / CountN).toFixed(8);
 
@@ -97,7 +128,7 @@ function RandomD() {
 
 
 function DoSort(){
-    
+    let CountN = parseInt(SortN.value);
     if(SortType.value == 'Stalin'){
     StalinSort();
     }
@@ -113,9 +144,17 @@ function DoSort(){
     if(SortType.value =='Selection'){
         SelectionSort();
     }
+    if(SortType.value =='Quick'){
+        Quick(0, CountN-1);
+    }
+    if(SortType.value =='Merge'){
+        MergeSort(0, CountN-1);
+    }
+
     if(SortType.value =='Focus'){
         PokusSort();
     }
+
 
    
 }
@@ -406,4 +445,119 @@ function SelectionSort(){
 
 
 
+} 
+
+function Quick(L, R) {
+    if (L >= R) return;
+
+    let oli = Math.floor(Math.random() * (R - L + 1)) + L;
+    let ol = parseFloat(SortA.children[oli].style.height);
+
+    let l = L;
+    let r = R;
+    
+    while (l <= r) {
+        while (parseFloat(SortA.children[l].style.height) < ol) {
+            l++;
+        }
+        while (parseFloat(SortA.children[r].style.height) > ol) {
+            r--;
+        }
+        setInterval(function(){if (l <= r) {
+            let n1 = parseFloat(SortA.children[l].style.height);
+            let n2 = parseFloat(SortA.children[r].style.height);
+            SortA.children[l].style.height = n2 + "%";
+            SortA.children[r].style.height = n1 + "%";
+            l++;
+            r--;
+            clearInterval(intervalId);
+        }},1);
+    }
+    
+    Quick(L, r);
+    Quick(l, R);
 }
+
+
+function MergeSort(left, right){
+    if(!(left<right)) return;
+
+    let mid = Math.floor((right - left) / 2 + left);
+    console.log(mid); 
+    
+    MergeSort(left,mid);
+    MergeSort(mid+1,right);
+    Merge(left,mid,right);
+
+
+}
+
+
+
+
+
+
+
+
+function Merge(left,mid,right){
+
+
+    let n1 = mid-left+1;//left
+    let n2 = right-mid;//right
+
+
+
+    let L = [];
+    let R = [];
+
+    for(let i=0;i<n1;i++){
+        let tmp = parseFloat(SortA.children[i+left].style.height);
+        L.push(tmp);
+    }
+    for(let i=0;i<n2;i++){
+        let tmp = parseFloat(SortA.children[i+mid+1].style.height);
+        R.push(tmp);
+    }
+
+    let i=0;//Left index
+    let j=0;//Right index
+    let k=left; 
+
+
+
+    while(i<n1 && j<n2){
+
+        if(L[i]<R[j]){
+            SortA.children[k].style.height = L[i] + "%";
+            i++;
+        }
+        else{
+            SortA.children[k].style.height = R[j] + "%";
+            j++;  
+
+        }
+    
+
+        k++;
+    }
+
+
+
+
+    while(i<n1 ){
+        SortA.children[k].style.height = L[i] + "%";
+        k++;
+        i++;
+    }
+
+    while(j<n2 ){
+        SortA.children[k].style.height = R[j] + "%";
+        k++;
+        j++;
+    }
+
+}
+
+
+
+Create();
